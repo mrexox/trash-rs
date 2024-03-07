@@ -1,8 +1,16 @@
 {
   "name": "trash-rs",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "Move files to trash using Rust bindings",
   "main": "index.js",
+  "url": "https://github.com/mrexox/trash-rs",
   "types": "index.d.ts",
+  "repository": "https://github.com/mrexox/trash-rs",
+  "keywords": [
+    "trash",
+    "rust",
+    "recycle bin"
+  ],
   "napi": {
     "name": "trash-rs",
     "triples": {
