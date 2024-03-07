@@ -1,24 +1,37 @@
 import fs from 'fs'
+import os from 'os'
+import path from 'path'
 import test from 'ava'
 
 import { trash, trashAll } from '../index.js'
 
+function createTmpDir() {
+  return fs.mkdtempSync(path.join(os.tmpdir(), 'test-'))
+}
+
+function createTmpFile() {
+  const dir = createTmpDir()
+  const filepath = path.join(dir, 'test-file.txt')
+  fs.writeFileSync(filepath, '')
+  return filepath
+}
+
 test('trash a file', (t) => {
-  fs.writeFileSync('/tmp/test.txt', '')
-  trash('/tmp/test.txt')
-  t.is(fs.existsSync('/tmp/test.txt'), false)
+  const filepath = createTmpFile()
+  trash(filepath)
+  t.is(fs.existsSync(filepath), false)
 })
 
 test('trash a folder', (t) => {
-  fs.mkdirSync('/tmp/test-folder', { recursive: true })
-  trash('/tmp/test-folder')
-  t.is(fs.existsSync('/tmp/test-folder'), false)
+  const dir = createTmpDir()
+  trash(dir)
+  t.is(fs.existsSync(dir), false)
 })
 
 test('trashAll', (t) => {
-  fs.writeFileSync('/tmp/test.txt', '')
-  fs.mkdirSync('/tmp/test-folder', { recursive: true })
-  trashAll(['/tmp/test.txt', '/tmp/test-folder'])
-  t.is(fs.existsSync('/tmp/test-folder'), false)
-  t.is(fs.existsSync('/tmp/test.txt'), false)
+  const dir = createTmpDir()
+  const file = createTmpFile()
+  trashAll([dir, file])
+  t.is(fs.existsSync(dir), false)
+  t.is(fs.existsSync(file), false)
 })
