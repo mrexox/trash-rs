@@ -5,7 +5,10 @@
   "main": "index.js",
   "url": "https://github.com/mrexox/trash-rs",
   "types": "index.d.ts",
-  "repository": "https://github.com/mrexox/trash-rs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrexox/trash-rs"
+  },
   "keywords": [
     "trash",
     "rust",
