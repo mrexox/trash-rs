@@ -22,6 +22,11 @@ test('trash a file', (t) => {
   t.is(fs.existsSync(filepath), false)
 })
 
+test('does not trash non-existing file', (t) => {
+  trash(path.join(os.tmpdir(), 'test-'))
+  t.is(true, true)
+})
+
 test('trash a folder', (t) => {
   const dir = createTmpDir()
   trash(dir)
@@ -33,5 +38,12 @@ test('trashAll', (t) => {
   const file = createTmpFile()
   trashAll([dir, file])
   t.is(fs.existsSync(dir), false)
+  t.is(fs.existsSync(file), false)
+})
+
+test('does not trash non-existing dirs', (t) => {
+  const nonexisting = path.join(os.tmpdir(), 'test-')
+  const file = createTmpFile()
+  trashAll([nonexisting, file])
   t.is(fs.existsSync(file), false)
 })
