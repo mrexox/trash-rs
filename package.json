@@ -1,6 +1,6 @@
 {
   "name": "trash-rs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Move files to trash using Rust bindings",
   "main": "index.js",
   "url": "https://github.com/mrexox/trash-rs",
